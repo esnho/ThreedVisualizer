@@ -4,3 +4,4 @@ coverage/
 .eslintcache
 npm-debug.log
 
+app/FirebaseUtils/FirebaseConfig.jsx
