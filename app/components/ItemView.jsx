@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
-import firebase from './../FirebaseUtils/FirebaseInitializer.jsx';
 import Item from './Item.jsx';
 
 export default class ItemView extends Component {
 
     constructor() {
       super();
+
       this.state = {
         items: []
       }
 
+      this.displayItems = this.displayItems.bind(this);
       this.updateItems = this.updateItems.bind(this);
     }
 
     componentDidMount() {
-      const itemsRef = firebase.database().ref('items');
+
+      let firebase = this.props.firebase;
+
+      const itemsRef = this.props.firebase.database().ref('items');
       itemsRef.on('value', this.updateItems);
+
     }
 
     /*componentWillUnmount() {
@@ -38,16 +43,30 @@ export default class ItemView extends Component {
       });
     }
 
+    displayItems() {
+      let items = [];
+      items = this.state.items;
+
+      return(
+        items.map((item) => {
+          return (
+            <Item id={item.id} title={item.title} user={item.user} />
+          )
+        })
+      );
+    }
+
     render() {
+      // if never loaded
+      // display loading
+      // else if there's not item display empty
+      // else diplay empty
+
       return (
         <section className='display-item'>
             <div className="wrapper">
               <ul>
-                {this.state.items.map((item) => {
-                  return (
-                    <Item id={item.id} title={item.title} user={item.user} />
-                  )
-                })}
+                {this.displayItems()}
               </ul>
             </div>
           </section>

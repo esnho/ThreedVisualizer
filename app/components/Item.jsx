@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import firebase from './../FirebaseUtils/FirebaseInitializer.jsx';
 
 export default class ItemActions extends Component {
 
@@ -19,7 +18,7 @@ export default class ItemActions extends Component {
   }
 
   removeItem() {
-    const itemRef = firebase.database().ref(`/items/${this.props.id}`);
+    const itemRef = this.props.firebase.database().ref(`/items/${this.props.id}`);
     itemRef.remove();
 
     this.removeProcess(false);
