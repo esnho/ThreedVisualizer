@@ -13,6 +13,7 @@ export default class App extends Component {
 
   componentDidMount() {
     auth.onAuthStateChanged((user) => {
+      this.forceUpdate();
     });
   }
 
